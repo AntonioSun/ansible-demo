@@ -1,0 +1,14 @@
+- name: Play-1
+  hosts: localhost
+  connection: local
+  pre_tasks:
+      - shell: echo Pre-tasks
+        notify: Run pre-tasks handler
+  tasks:
+      - name: Task-1
+        debug:
+            msg: Task-1 successfully run
+  handlers:
+      - name: Run pre-tasks handler
+        debug:
+            msg: Pre-tasks handler successfully run
