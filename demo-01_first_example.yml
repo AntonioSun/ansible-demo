@@ -1,0 +1,14 @@
+- name: My first play
+
+  # Hosts where tasks will be executed (none specified)
+  hosts: localhost
+
+  # Tasks section
+  tasks:
+   - name: Display a message
+     debug:
+      msg: "Hello, Ansible!"
+
+   - name: Ping my hosts
+     ping:
+
