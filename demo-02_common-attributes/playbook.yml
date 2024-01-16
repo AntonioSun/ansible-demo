@@ -1,0 +1,11 @@
+- name: using common attributes
+
+  # Hosts where tasks will be executed
+  hosts: webservers
+  gather_facts: False
+
+  # Tasks section
+  tasks:
+    - name: Print region and zone
+      debug:
+        msg: "Region: {{ region }}, Zone: {{ zone }}"
