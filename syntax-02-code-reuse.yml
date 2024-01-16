@@ -1,0 +1,51 @@
+- name: demonstrating code reuse methods
+
+  # Define variables
+  vars:
+    http_port: 80
+    app_name: myapp
+
+  # Hosts where tasks will be executed
+  hosts: webservers
+  gather_facts: False
+
+  # Include common tasks from another file
+  # Using include directive for code reuse
+  # File: common_tasks.yml
+  tasks:
+    - include: common_tasks.yml
+
+  # Tasks section
+  tasks:
+    - name: Ensure Apache is installed
+      package:
+        name: apache2
+        state: present
+
+    - name: Ensure Apache service is running
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    # Reusing a task within the playbook
+    - name: Copy configuration file
+      include_tasks: copy_config.yml
+
+    - name: Start/Restart Apache if config changed
+      meta: flush_handlers
+
+    # Using role for deploying application
+    - name: Deploy the application
+      include_role:
+        name: deploy_app
+      vars:
+        app_repo: https://github.com/username/myapp.git
+        app_dest: /var/www/{{ app_name }}
+
+  # Handlers section for service restart
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

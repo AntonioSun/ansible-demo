@@ -1,0 +1,47 @@
+- name: demonstrating configuration capabilities
+
+  # Define variables
+  vars:
+    http_port: 80
+    app_name: myapp
+
+  # Hosts where tasks will be executed
+  hosts: webservers
+  gather_facts: False
+
+  # Tasks section
+  tasks:
+    - name: Ensure Apache is installed
+      package:
+        name: apache2
+        state: present
+
+    - name: Ensure Apache service is running
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Copy configuration file
+      copy:
+        src: /path/to/local/httpd.conf
+        dest: /etc/apache2/httpd.conf
+      notify:
+        - Restart Apache
+
+    - name: Start/Restart Apache if config changed
+      meta: flush_handlers
+
+    - name: Deploy the application
+      git:
+        repo: https://github.com/username/myapp.git
+        dest: /var/www/{{ app_name }}
+      notify:
+        - Restart Apache
+
+  # Handlers section for service restart
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
