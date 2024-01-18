@@ -1,0 +1,19 @@
+# Ansible playbook with a common task for different host groups
+- name: common tasks
+
+  # Hosts where tasks will be executed (no hosts specified here)
+  hosts: all
+
+  # Gather facts for conditional checks
+  gather_facts: false # yes
+
+  # Tasks section
+  tasks:
+    - name: Execute common task based on host group
+      debug:
+        msg: |
+          This is a common task.
+          Host: {{ inventory_hostname }}
+
+      # Use a conditional to determine the host group
+      when: "'webservers' in group_names"

@@ -1,0 +1,19 @@
+
+PLAY [common tasks] ************************************************************
+
+TASK [Execute common task based on host group] *********************************
+ok: [webserver1] => {
+    "msg": "This is a common task.\nHost: webserver1\n"
+}
+skipping: [dbserver1]
+ok: [webserver2] => {
+    "msg": "This is a common task.\nHost: webserver2\n"
+}
+skipping: [dbserver2]
+
+PLAY RECAP *********************************************************************
+dbserver1                  : ok=0    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+dbserver2                  : ok=0    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+webserver1                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+webserver2                 : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
