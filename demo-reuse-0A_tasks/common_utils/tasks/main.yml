@@ -1,0 +1,11 @@
+---
+# tasks/main.yml
+- name: Common utility tasks
+  debug:
+    msg: "This role contains various utility tasks."
+
+- include_tasks: task1.yml
+
+- name: Last tasks
+  include_tasks: task3.yml
+

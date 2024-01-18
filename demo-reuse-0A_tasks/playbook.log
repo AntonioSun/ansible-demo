@@ -1,0 +1,50 @@
+
+PLAY [use utility tasks] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [common_utils : Common utility tasks] *************************************
+ok: [localhost] => {
+    "msg": "This role contains various utility tasks."
+}
+
+TASK [common_utils : include_tasks] ********************************************
+included: demo-reuse-0A/common_utils/tasks/task1.yml for localhost
+
+TASK [common_utils : Task 1] ***************************************************
+ok: [localhost] => {
+    "msg": "This is task 1."
+}
+
+TASK [common_utils : Last tasks] ***********************************************
+included: demo-reuse-0A/common_utils/tasks/task3.yml for localhost
+
+TASK [common_utils : Task 3] ***************************************************
+ok: [localhost] => {
+    "msg": "This is task 3."
+}
+
+TASK [call utility tasks] ******************************************************
+
+TASK [common_utils : Task 2] ***************************************************
+ok: [localhost] => {
+    "msg": "This is task 2."
+}
+
+TASK [install packages] ********************************************************
+
+TASK [common_utils : Install common packages] **********************************
+ok: [localhost] => (item=htop) => {
+    "msg": "Installing htop"
+}
+ok: [localhost] => (item=curl) => {
+    "msg": "Installing curl"
+}
+ok: [localhost] => (item=wget) => {
+    "msg": "Installing wget"
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=8    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

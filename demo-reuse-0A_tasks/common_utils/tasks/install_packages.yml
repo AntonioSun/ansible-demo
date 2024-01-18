@@ -1,0 +1,13 @@
+---
+# tasks/install_packages.yml
+- name: Install common packages
+  become: true
+  # package:   # conflicting action statements: package, debug
+  #   name: "{{ item }}"
+  #   state: present
+  loop:
+    - htop
+    - curl
+    - wget
+  debug:
+    msg: "Installing {{ item }}"

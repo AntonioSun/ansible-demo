@@ -1,0 +1,21 @@
+- name: use utility tasks
+
+  # Hosts where tasks will be executed
+  hosts: localhost
+
+  # Roles to include
+  roles:
+    - role: common_utils
+      tasks_from: install_packages  # not working!
+
+  # Tasks section
+  tasks:
+    - name: call utility tasks
+      include_role:
+        name: common_utils
+        tasks_from: task2
+
+    - name: install packages
+      include_role:
+        name: common_utils
+        tasks_from: install_packages

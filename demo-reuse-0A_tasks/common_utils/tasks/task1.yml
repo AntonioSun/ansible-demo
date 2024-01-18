@@ -1,0 +1,4 @@
+# role/tasks/task1.yml
+- name: Task 1
+  debug:
+    msg: "This is task 1."
