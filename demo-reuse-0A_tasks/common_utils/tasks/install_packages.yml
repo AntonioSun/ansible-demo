@@ -11,3 +11,7 @@
     - wget
   debug:
     msg: "Installing {{ item }}"
+  # A debug task does not have a changed state. A change is required for an handler to trigger
+  changed_when: true
+  notify: Run post-install handler
+

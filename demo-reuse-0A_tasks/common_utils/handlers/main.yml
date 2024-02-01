@@ -1,2 +1,5 @@
 ---
 # handlers file for common_utils
+- name: Run post-install handler
+  debug:
+    msg: "Post-install called" # {{ item }}"
