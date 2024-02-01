@@ -1,0 +1,19 @@
+- name: Play notify
+  hosts: localhost
+  gather_facts: no
+  vars:
+    this_thing_is_true: true
+
+  tasks:
+    - debug:
+        msg: 'Notifying handlers'
+        # var: this_thing_is_true 
+        # ^-- might be an alternative option to msg:
+      changed_when: this_thing_is_true  
+      notify: 
+        - me 
+
+  handlers:
+    - name: me
+      debug:
+        msg: 'I have been notified'

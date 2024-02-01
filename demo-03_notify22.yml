@@ -1,0 +1,14 @@
+- name: Play notify
+  hosts: localhost
+
+  tasks:
+    - name: with assert
+      assert: { that: true, quiet: true }
+      changed_when: true
+      #when: something is changed
+      notify: 'do stuff'
+
+  handlers:
+    - name: do stuff
+      debug:
+        msg: 'I have been notified'
